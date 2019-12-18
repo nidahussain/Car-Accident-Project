@@ -1,6 +1,6 @@
 # Car-Accident-Project Proposal
 
-Team: Charlene Gray, Nida Hussain,  Varun Athreya ,Christine Mazur and Sathya Ruchirantha
+Team: Charlene Gray, Nida Hussain, Varun Athreya, Christine Mazur and Sathya Ruchirantha
 
 Topic:  Our team will present a website for users to drill down on a chosen geographic area and visualize car accident data along with weather conditions at the time of the accident on a map. 
 
