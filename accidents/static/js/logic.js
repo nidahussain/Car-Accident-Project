@@ -41,7 +41,7 @@ d3.json("/mapkey").then( configResponse => {
   // Create a baseMaps object to hold the lightmap layer
 
 
-  // Create an overlayMaps object to hold the bikeStations layer
+  // Create an overlayMaps object to hold the accidentaccidents layer
 
 
   // Create the map object with options
@@ -49,37 +49,37 @@ d3.json("/mapkey").then( configResponse => {
 
   // Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
 
-  d3.csv("/data/US_Accidents_May19.csv").then(response => {
+  d3.csv("US_Accidents_May19 2018_2019.csv").then(response => {
     console.log(response.data);
   //d3.json('https://data.ny.gov/api/views/e8ky-4vqe/rows.json?accessType=DOWNLOAD').then(response => {
     //console.log(response.data);
 
     // Create the createMarkers function
-    // console.log(stations);
+    // console.log(accidents);
 
-    // Pull the "stations" property off of response.data
+    // Pull the "accidents" property off of response.data
     let columns = response.data.columns
 
-    // Initialize an array to hold bike markers
+    // Initialize an array to hold accident markers
     let accidentMarkers = [];
 
-    // Loop through the stations array
+    // Loop through the accidents array
     columns.forEach(columns => {
 
-      // For each station, create a marker and bind a popup with the station's name
+      // For each accident, create a marker and bind a popup with the accident's name
       accidentMarkers.push(L.marker([column.lat, column.lon], {
 
       }));
 
-      // Add the marker to the bikeMarkers array
-      bikeMarkers[bikeMarkers.length - 1].addTo(layers['ALL']);
+      // Add the marker to the accidentMarkers array
+      accidentMarkers[accidentMarkers.length - 1].addTo(layers['ALL']);
     });
-    // Create a layer group made from the bike markers array, pass it into the createMap function
+    // Create a layer group made from the accident markers array, pass it into the createMap function
 
 
   });
 
-  // Perform an API call to the Citi Bike API to get station information. Call createMarkers when complete
+  // Perform an API call to the Citi accident API to get accident information. Call createMarkers when complete
 
 })
 
