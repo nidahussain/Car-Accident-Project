@@ -49,24 +49,25 @@ d3.json("/mapkey").then( configResponse => {
 
   // Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
 
-
-  d3.json('https://gbfs.citibikenyc.com/gbfs/en/station_information.json').then(response => {
+  d3.csv("/data/US_Accidents_May19.csv").then(response => {
     console.log(response.data);
+  //d3.json('https://data.ny.gov/api/views/e8ky-4vqe/rows.json?accessType=DOWNLOAD').then(response => {
+    //console.log(response.data);
 
     // Create the createMarkers function
     // console.log(stations);
 
     // Pull the "stations" property off of response.data
-    let stations = response.data.stations
+    let columns = response.data.columns
 
     // Initialize an array to hold bike markers
-    let bikeMarkers = [];
+    let accidentMarkers = [];
 
     // Loop through the stations array
-    stations.forEach(station => {
+    columns.forEach(columns => {
 
       // For each station, create a marker and bind a popup with the station's name
-      bikeMarkers.push(L.marker([station.lat, station.lon], {
+      accidentMarkers.push(L.marker([column.lat, column.lon], {
 
       }));
 

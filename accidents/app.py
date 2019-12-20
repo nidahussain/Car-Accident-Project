@@ -28,7 +28,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "s
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '')
 db = SQLAlchemy(app)
 
-from .models import Pet
+from .models import Accident
 
 
 # create route that renders index.html template
@@ -53,27 +53,27 @@ def mapkeyroute():
 @app.route("/send", methods=["GET", "POST"])
 def send():
     if request.method == "POST":
-        name = request.form["petName"]
-        lat = request.form["petLat"]
-        lon = request.form["petLon"]
+        name = request.form["accName"]
+        lat = request.form["accLat"]
+        lon = request.form["accLon"]
 
-        pet = Pet(name=name, lat=lat, lon=lon)
-        db.session.add(pet)
+        acc = Accident(name=name, lat=lat, lon=lon)
+        db.session.add(acc)
         db.session.commit()
         return redirect("/", code=302)
 
     return render_template("form.html")
 
 
-@app.route("/api/pals")
-def pals():
-    results = db.session.query(Pet.name, Pet.lat, Pet.lon).all()
+@app.route("/api/accidents")
+def accidents():
+    results = db.session.query(Accident.name, Accident.lat, Accident.lon).all()
 
     hover_text = [result[0] for result in results]
     lat = [result[1] for result in results]
     lon = [result[2] for result in results]
 
-    pet_data = [{
+    acc_data = [{
         "type": "scattergeo",
         "locationmode": "USA-states",
         "lat": lat,
@@ -89,7 +89,7 @@ def pals():
         }
     }]
 
-    return jsonify(pet_data)
+    return jsonify(acc_data)
 
 
 if __name__ == "__main__":

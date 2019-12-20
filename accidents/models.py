@@ -1,8 +1,8 @@
 from .app import db
 
 
-class Pet(db.Model):
-    __tablename__ = 'pets'
+class Accident(db.Model):
+    __tablename__ = 'Accident'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
@@ -10,4 +10,4 @@ class Pet(db.Model):
     lon = db.Column(db.Float)
 
     def __repr__(self):
-        return '<Pet %r>' % (self.name)
+        return '<Accident %r>' % (self.name)

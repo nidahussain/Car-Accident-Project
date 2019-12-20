@@ -1,7 +1,7 @@
 function buildPlot() {
     /* data route */
-  var url = "/api/pals";
-  d3.json(url).then(function(response) {
+  var csv = "/data/US_Accidents_May19.csv";
+  d3.csv(csv).then(function(response) {
 
     console.log(response);
 
@@ -9,7 +9,7 @@ function buildPlot() {
 
     var layout = {
       scope: "usa",
-      title: "Pet Pals",
+      title: "Accidents",
       showlegend: false,
       height: 600,
             // width: 980,
