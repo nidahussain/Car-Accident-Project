@@ -49,7 +49,7 @@ d3.json("/mapkey").then( configResponse => {
 
   // Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
 
-  d3.csv("US_Accidents_May19 2018_2019.csv").then(response => {
+  d3.csv("/data/FinalData.csv").then(response => {
     console.log(response.data);
   //d3.json('https://data.ny.gov/api/views/e8ky-4vqe/rows.json?accessType=DOWNLOAD').then(response => {
     //console.log(response.data);
