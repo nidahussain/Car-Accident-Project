@@ -1,0 +1,36 @@
+a git branch starts off with master
+
+create at least 3 branches for your work (this will obviously depend on your group)
+I have listed some example setups below, the way i will work today is the top one
+experimental branches are for work that isn't tested very well
+release branches are for work that is ready to be merged (because each developer tested it)
+
+setup
+basic_experimental
+basis_release
+version_1_experimental
+version_1_release
+version_2_experimental
+version_2_release
+
+deb_experimental
+deb_release
+sonya_experimental
+sonya_release
+jim_experimental
+jim_release
+
+deb_release
+sonya_release
+jim_release
+
+3 ways to fix bad changes and go back in time (there are quite literally hundreds of ways to fix version in git, I'm giving you guys 3 because I know you guys haven't been using these)
+1. if you haven't commited yet, git stash
+2. if you have commited, roll back a commit -> (git reset --soft HEAD~1), then git stash
+3. if you have commited, re-checkout the experimental branch using the release branch -> git checkout release_branch_name, git branch -m experimental_branch experimental_branch_broken_1, git checkout -b experimental_branch
+
+You want to commit
+1. When you finish a feature
+2. When you fix a bug
+3. When you add a series of files
+4. When it is the end of the day
