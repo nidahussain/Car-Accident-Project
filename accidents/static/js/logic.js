@@ -67,7 +67,7 @@ d3.json("/mapkey").then( configResponse => {
     columns.forEach(columns => {
 
       // For each accident, create a marker and bind a popup with the accident's name
-      accidentMarkers.push(L.marker([column.lat, column.lon], {
+      accidentMarkers.push(L.marker([column.StartLat, column.StartLon], {
 
       }));
 

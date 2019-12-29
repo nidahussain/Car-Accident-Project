@@ -2,12 +2,13 @@ from .app import db
 
 
 class Accident(db.Model):
-    __tablename__ = 'Accident'
+    __tablename__ = 'Accidents'
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64))
-    lat = db.Column(db.Float)
-    lon = db.Column(db.Float)
+    ID = db.Column(db.varchar, primary_key=True)
+    Start_Time = db.Column(db.varchar)
+    Start_Lat = db.Column(db.varchar)
+    Start_Lon = db.Column(db.varchar)
+    Weather_Condition = db.Column(db.varchar)
 
     def __repr__(self):
         return '<Accident %r>' % (self.name)

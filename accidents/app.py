@@ -22,7 +22,7 @@ mapkey = os.environ.get('MAPKEY', '') or "CREATE MAPKEY ENV"
 #################################################
 
 from flask_sqlalchemy import SQLAlchemy
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db.sqlite"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///accidentsSQL.sql"
 
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '')
@@ -53,11 +53,9 @@ def mapkeyroute():
 @app.route("/send", methods=["GET", "POST"])
 def send():
     if request.method == "POST":
-        name = request.form["accName"]
-        lat = request.form["accLat"]
-        lon = request.form["accLon"]
+        state = request.form["accState"]
 
-        acc = Accident(name=name, lat=lat, lon=lon)
+        acc = Accident(name=state)
         db.session.add(acc)
         db.session.commit()
         return redirect("/", code=302)
