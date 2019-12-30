@@ -1,10 +1,10 @@
 function buildPlot() {
     /* data route */
-  var csv = "/data/FinalData.csv";
-  d3.csv(csv).then(function(response) {
+  var acc_data = "/data/US_Accidents_May19_2018_2019.csv";
+  d3.csv(acc_data).then(function(response) {
 
     console.log(response);
-
+    //console.log(csv);
     var data = response;
 
     var layout = {
