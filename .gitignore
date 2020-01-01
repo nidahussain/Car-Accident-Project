@@ -1,0 +1,5 @@
+accidents/db.sqlite
+accidents/data
+__pycache__
+.ipynb_checkpoints
+accidents/static/js/config.js
