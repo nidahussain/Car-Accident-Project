@@ -1,20 +1,39 @@
+import os
+import sqlite3
+import pandas as pd
 import numpy as np
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
-import os
 from flask import (
     Flask,
     render_template,
     jsonify,
     request,
     redirect)
+from flask_sqlalchemy import SQLAlchemy
+from flask import json
+from flask import url_for
 import psycopg2
 
 # start here
 from configparser import ConfigParser
 
+# ###try this###
+# from flask_sqlalchemy import SQLAlchemy
+# app = Flask(__name__)
+# db = SQLAlchemy(app)
+# from .models import Accident
+# ###end try this###
+#################################################
+# Flask Setup
+#################################################
+app = Flask(__name__)
+#################################################
+# Maps Setup
+#################################################
+mapkey = os.environ.get('MAPKEY', '') or "CREATE MAPKEY ENV"
 #################################################
 # Database Setup
 #################################################
@@ -25,10 +44,13 @@ Base = automap_base()
 Base.prepare(engine, reflect=True)
 # Save reference to the table
 Accident = Base.classes.accidentsSQL
-#################################################
-# Flask Setup
-#################################################
-app = Flask(__name__)
+from flask_sqlalchemy import SQLAlchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///data/accidentsSQL.sqlite"
+db = SQLAlchemy(app)
+from .models import accident
+Base = automap_base()
+Base.prepare(db.engine, reflect=True)
+
 #################################################
 # Flask Routes
 #################################################
@@ -42,13 +64,11 @@ def welcome():
     )
 ######## FLASK END
 
-
 def config(filename='database.ini', section='postgresql'):
     # create a parser
     parser = ConfigParser()
     # read config file
     parser.read(filename)
- 
     # get section, default to postgresql
     db = {}
     if parser.has_section(section):

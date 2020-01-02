@@ -12,8 +12,6 @@ d3.json("/mapkey").then( configResponse => {
     id: "mapbox.light",
     accessToken: API_KEY
   });
-
-
   var layers = {
     // COMING_SOON: new L.LayerGroup(),
     // EMPTY: new L.LayerGroup(),
@@ -33,23 +31,13 @@ d3.json("/mapkey").then( configResponse => {
     ]
   });
   // Create the createMap function
-
-
   // Create the tile layer that will be the background of our map
-
-
   // Create a baseMaps object to hold the lightmap layer
-
-
   // Create an overlayMaps object to hold the accidentaccidents layer
-
-
   // Create the map object with options
-
-
   // Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
 
-  d3.csv("/data/FinalData.csv").then(response => {
+  d3.csv("/data/US_Accidents_May19_2018_2019.csv").then(response => {
     console.log(response.data);
   //d3.json('https://data.ny.gov/api/views/e8ky-4vqe/rows.json?accessType=DOWNLOAD').then(response => {
     //console.log(response.data);
@@ -59,10 +47,8 @@ d3.json("/mapkey").then( configResponse => {
 
     // Pull the "accidents" property off of response.data
     let columns = response.data.columns
-
     // Initialize an array to hold accident markers
     let accidentMarkers = [];
-
     // Loop through the accidents array
     columns.forEach(columns => {
 
@@ -70,16 +56,11 @@ d3.json("/mapkey").then( configResponse => {
       accidentMarkers.push(L.marker([column.StartLat, column.StartLon], {
 
       }));
-
       // Add the marker to the accidentMarkers array
       accidentMarkers[accidentMarkers.length - 1].addTo(layers['ALL']);
     });
     // Create a layer group made from the accident markers array, pass it into the createMap function
-
-
   });
-
-  // Perform an API call to the Citi accident API to get accident information. Call createMarkers when complete
-
+  // NO NEED: Perform an API call to the accident API to get accident information. Call createMarkers when complete
 })
 
