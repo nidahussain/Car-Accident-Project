@@ -1,14 +1,14 @@
-from app import db
-from sqlalchemy import create_engine
-from sqlalchemy import column, Integer, String, Float, VARCHAR
+from .app import db
+# from sqlalchemy import create_engine
+# from sqlalchemy import column, Integer, String, Float
 
-from sqlalchemy.ext.declarative import declarative_base
-Base = declarative_base()
+# from sqlalchemy.ext.declarative import declarative_base
+# Base = declarative_base()
 
 class accident(db.Model):
     __tablename__ = 'us_accidents'
-    accid = db.column(db.varchar, primary_key=True)
-    severity = db.column(db.varchar(100))
+    accid = db.Column(db.varchar(100))
+    severity = db.Column(db.varchar(100))
     start_time = db.Column(db.varchar(100))
     end_time = db.Column(db.varchar(100))
     start_lat = db.Column(db.varchar(100))
@@ -32,6 +32,7 @@ class accident(db.Model):
     precipitation = db.Column(db.varchar(100))
     weather_condition = db.Column(db.varchar(100))
     astronomical_twilight = db.Column(db.varchar(100))
+    id = db.Column(db.Integer, primary_key=True)
 
     def __repr__(self):
         return '<accident %r>' % (self.name)
