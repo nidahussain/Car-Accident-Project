@@ -66,21 +66,20 @@ def maps():
 @app.route("/mapkey")
 def mapkeyroute():
     global mapkey
-    config = { "APIKEY": mapkey }
+    config = { "api_key": mapkey }
     return jsonify(config)
 
 # Query the database and send the jsonified results
-# @app.route("/send", methods=["GET", "POST"])
-# def send():
-#     if request.method == "POST":
-#         state = request.form["accState"]
+@app.route("/send", methods=["GET", "POST"])
+def send():
+    if request.method == "POST":
+        state = request.form["accState"]
+        accidents = accidents(name=state)
+        db.session.add(accidents)
+        db.session.commit()
+        return redirect("/", code=302)
 
-#         accidents = accidents(name=state)
-#         db.session.add(accidents)
-#         db.session.commit()
-#         return redirect("/", code=302)
-
-#     return render_template("form.html")
+    return render_template("form.html")
 
 @app.route("/api/accidents")
 def getAccidentData():
@@ -113,7 +112,6 @@ def getAccidentData():
     }]
 
     return jsonify(acc_data)
-
 
 if __name__ == "__main__":
     app.run()
