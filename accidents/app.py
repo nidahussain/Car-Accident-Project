@@ -7,6 +7,7 @@ from flask import (
     request,
     redirect)
 import pandas as pd
+import json
 import numpy as np
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
@@ -88,12 +89,12 @@ def getAccidentData():
     start_lat = [result[1] for result in results]
     start_lng = [result[2] for result in results]
 
-    for result in results:
-        row = list(result)
-        print(row[0])
-        print(row[1])
-        print(row[2])
-        break
+    # for result in results:
+    #     row = list(result)
+    #     print(row[0])
+    #     print(row[1])
+    #     print(row[2])
+    #     break
 
     acc_data = [{
         "type": "scattergeo",
