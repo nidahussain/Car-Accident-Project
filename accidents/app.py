@@ -46,10 +46,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Catpuss10!@localh
 db = SQLAlchemy(app)
 
 ######this stuff is to try to get .models to import####
-PACKAGE_PARENT = '..'
-SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
-sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
+# PACKAGE_PARENT = '..'
+# SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
+# sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
 #######################################################
+# from .models import accidents
 
 @app.route("/")
 def home():
@@ -68,32 +69,38 @@ def mapkeyroute():
     return jsonify(config)
 
 # Query the database and send the jsonified results
-@app.route("/send", methods=["GET", "POST"])
-def send():
-    if request.method == "POST":
-        state = request.form["accState"]
+# @app.route("/send", methods=["GET", "POST"])
+# def send():
+#     if request.method == "POST":
+#         state = request.form["accState"]
 
-        accidents = accidents(name=state)
-        db.session.add(accidents)
-        db.session.commit()
-        return redirect("/", code=302)
+#         accidents = accidents(name=state)
+#         db.session.add(accidents)
+#         db.session.commit()
+#         return redirect("/", code=302)
 
-    return render_template("form.html")
+#     return render_template("form.html")
 
 @app.route("/api/accidents")
-def accidents():
-    results = db.session.query(Accidents.start_lat, Accidents.start_lng).all()
-
-    hover_text = [result[0] for result in results]
+def getAccidentData():
+    results = db.session.query(Accidents.state, Accidents.start_lat, Accidents.start_lng).all()
+    state = [result[0] for result in results]
     start_lat = [result[1] for result in results]
     start_lng = [result[2] for result in results]
+
+    for result in results:
+        row = list(result)
+        print(row[0])
+        print(row[1])
+        print(row[2])
+        break
 
     acc_data = [{
         "type": "scattergeo",
         "locationmode": "USA-states",
         "lat": start_lat,
         "lon": start_lng,
-        "text": hover_text,
+        "text": state,
         "hoverinfo": "text",
         "marker": {
             "size": 50,

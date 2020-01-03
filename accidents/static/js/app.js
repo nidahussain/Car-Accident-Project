@@ -1,5 +1,11 @@
+// var pg = require(pg);
+
 function buildPlot() {
     /* data route */
+  // var connectionString = "postgres://postgres:Catpuss10!@localhost/ip:5432/US_Accidents";
+  // var pgClient = new pg.Client(connectionString);
+
+
   var acc_data = "/data/US_Accidents_May19_2018_2019.csv";
   d3.csv(acc_data).then(function(response) {
 
