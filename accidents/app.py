@@ -13,7 +13,6 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 import sqlite3
-from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from sqlalchemy import or_
@@ -28,8 +27,8 @@ mapkey = os.environ.get('MAPKEY', '') or "CREATE MAPKEY ENV"
 #################################################
 # Database Setup
 #################################################
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db/accidentsSQL.sqlite"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Catpuss10!@localhost/US_Accidents'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db/accidentsSQL.sqlite"
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Catpuss10!@localhost/US_Accidents'
 db = SQLAlchemy(app)
 
 ######this stuff is to try to get .models to import####
@@ -72,7 +71,6 @@ class accident(db.Model):
     # def __repr__(self):
     #     return '<accident %r>' % (self.name)
 
-
     # def __init__(self, severity, start_time, end_time):
     #     self.severity = severity
     #     self.start_time = start_time
@@ -112,3 +110,33 @@ def send():
         return redirect("/", code=302)
 
     return render_template("form.html")
+
+@app.route("/api/accidents")
+def accidents():
+    results = db.session.query(accident.start_lat, accident.start_lng).all()
+
+    hover_text = [result[0] for result in results]
+    start_lat = [result[1] for result in results]
+    start_lng = [result[2] for result in results]
+
+    acc_data = [{
+        "type": "scattergeo",
+        "locationmode": "USA-states",
+        "lat": start_lat,
+        "lon": start_lng,
+        "text": hover_text,
+        "hoverinfo": "text",
+        "marker": {
+            "size": 50,
+            "line": {
+                "color": "rgb(8,8,8)",
+                "width": 1
+            },
+        }
+    }]
+
+    return jsonify(acc_data)
+
+
+if __name__ == "__main__":
+    app.run()

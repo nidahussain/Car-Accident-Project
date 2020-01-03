@@ -1,7 +1,7 @@
 
 d3.json("/mapkey").then( configResponse => {
 
-  let API_KEY = configResponse.apikey;
+  let api_key = configResponse.apikey;
   // var newYorkCoords = [40.73, -74.0059];
   // var mapZoomLevel = 12;
 
@@ -10,7 +10,7 @@ d3.json("/mapkey").then( configResponse => {
     attribution: "Map data &copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"http://mapbox.com\">Mapbox</a>",
     maxZoom: 18,
     id: "mapbox.light",
-    accessToken: API_KEY
+    accessToken: api_key
   });
   var layers = {
     // COMING_SOON: new L.LayerGroup(),
@@ -53,7 +53,7 @@ d3.json("/mapkey").then( configResponse => {
     columns.forEach(columns => {
 
       // For each accident, create a marker and bind a popup with the accident's name
-      accidentMarkers.push(L.marker([column.StartLat, column.StartLon], {
+      accidentMarkers.push(L.marker([column.StartLat, column.StartLng], {
 
       }));
       // Add the marker to the accidentMarkers array
