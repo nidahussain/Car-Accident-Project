@@ -9,7 +9,8 @@ function buildPlot() {
   // we might use this csv if all else fails... 
   // var acc_data = "/data/US_Accidents_May19_2018_2019.csv";
 
-  d3.json(acc_data).then(function(response) {
+  d3.json("http://127.0.0.1:5000/api/accidents").then(function(response) {
+  // d3.json("http://127.0.0.1:5000/api/accidents").then(data => console.log(data)) {  
     // console.log(response);
     // console.log(csv);
     var data = response;

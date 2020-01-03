@@ -110,7 +110,6 @@ def getAccidentData():
             },
         }
     }]
-
     return jsonify(acc_data)
 
 if __name__ == "__main__":
