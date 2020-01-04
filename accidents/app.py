@@ -70,6 +70,7 @@ def mapkeyroute():
     return jsonify(config)
 
 # Query the database and send the jsonified results
+# Can we update this to choose a state abbrev. and open a map to that state or list accident data for that state?
 @app.route("/send", methods=["GET", "POST"])
 def send():
     if request.method == "POST":

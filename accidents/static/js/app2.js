@@ -1,5 +1,5 @@
 // var mapboxAccessToken = {accessToken: 'pk.eyJ1IjoiY2hyaXN0aW5lbWF6dXIiLCJhIjoiY2szdGRzNnF1MDExbjNtbzJoZGgzNGVydSJ9.neoILoqcBhS-IMgXYX-CWQ'
-var mymap = L.map('map-id').setView([51.505, -0.09], 13);
+var mymap = L.map('map-id').setView([37.09, -95.71], 5);
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
