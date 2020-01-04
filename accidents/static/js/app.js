@@ -1,10 +1,19 @@
+// var pg = require(pg);
+
 function buildPlot() {
     /* data route */
-  var acc_data = "/data/US_Accidents_May19_2018_2019.csv";
-  d3.csv(acc_data).then(function(response) {
+  // Attempting to bring DB into js... not needed anymore
+  // var connectionString = "postgres://postgres:Catpuss10!@localhost/ip:5432/US_Accidents";
+  // var pgClient = new pg.Client(connectionString);
+  
+  // we might use this csv if all else fails... 
+  // var acc_data = "/data/US_Accidents_May19_2018_2019.csv";
 
-    console.log(response);
-    //console.log(csv);
+  d3.json('/api/accidents').then(function(response) {
+
+  // d3.json("http://127.0.0.1:5000/api/accidents").then(data => console.log(data)) {  
+    // console.log(response);
+    // console.log(csv);
     var data = response;
 
     var layout = {
