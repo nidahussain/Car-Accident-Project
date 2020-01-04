@@ -43,7 +43,7 @@ app = Flask(__name__)
 # Database Setup
 #################################################
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db/accidentsSQL.sqlite"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Catpuss10!@localhost/US_Accidents'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Catpuss10!@localhost/accidents_small'
 db = SQLAlchemy(app)
 
 ######this stuff is to try to get .models to import####

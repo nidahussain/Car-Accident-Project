@@ -6,7 +6,9 @@ d3.json("/mapkey").then( configResponse => {
   // var mapZoomLevel = 12;
 
   // Create the tile layer that will be the background of our map
-  var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token={accessToken}", {
+  // var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token={accessToken}", {
+
+    var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/streets-v11.html?title=true&access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NDg1bDA1cjYzM280NHJ5NzlvNDMifQ.d6e-nNyBDtmQCVwVNivz7A#2/0/0", {
     attribution: "Map data &copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"http://mapbox.com\">Mapbox</a>",
     maxZoom: 18,
     id: "mapbox.light",
@@ -36,9 +38,9 @@ d3.json("/mapkey").then( configResponse => {
   // Create an overlayMaps object to hold the accidentaccidents layer
   // Create the map object with options
   // Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
-
-  d3.csv("/data/US_Accidents_May19_2018_2019.csv").then(response => {
-    console.log(response.data);
+  // d3.json('/api/accidents').then(function(response)
+  d3.json("/api/accidents").then(response => {
+  // console.log(response.data);
   //d3.json('https://data.ny.gov/api/views/e8ky-4vqe/rows.json?accessType=DOWNLOAD').then(response => {
     //console.log(response.data);
 
