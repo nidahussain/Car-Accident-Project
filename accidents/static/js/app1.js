@@ -1,14 +1,17 @@
 // Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/2011_us_ag_exports.csv', function(err, rows){
-d3.json('/api/accidents').then(function(response){
+var rows = d3.json('/api/accidents').then(function(response){
       function unpack(rows, key) {
           return rows.map(function(row) { return row[key]; });
       }
       var data = [{
           type: 'choropleth',
           locationmode: 'USA-states',
-          locations: unpack(rows, 'code'),
-          z: unpack(rows, 'total exports'),
+          locations: unpack(rows, 'start_lat'),
+          z: unpack(rows, 'start_lng'),
           text: unpack(rows, 'state'),
+        //   locations: unpack(rows, 'code'),
+        //   z: unpack(rows, 'total exports'),
+        //   text: unpack(rows, 'state'),
           zmin: 0,
           zmax: 17000,
           colorscale: [
