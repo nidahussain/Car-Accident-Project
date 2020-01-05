@@ -62,6 +62,10 @@ def home():
 def maps():
     return render_template("map.html")
 
+# @app.route("/njmaps")
+# def maps():
+#     return render_template("NJmap.html")
+
 # create route that gives us our map key
 @app.route("/mapkey")
 def mapkeyroute():
