@@ -1,0 +1,87 @@
+# changes for this version... I added a run_win for windows users
+# added a run_win.bat with env and script setup
+# added a .gitignore ... because no one likes plump database files in their git repo and you should try not to expose any keys in your repository
+# PLEASE MAKE SURE: Add any large files or files that you do not want in the repo into the .gitignore file
+
+
+
+# for windows only
+# added alias for the anaconda prompt so that gitbash can start anaconda prompts
+# right click > open file location, right click anaconda prompt > properties on the shortcut for anaconda prompt
+# in the shortcut tab, copy the target box (mine is below)
+# %windir%\System32\cmd.exe "/K" C:\Users\medot\Anaconda3\Scripts\activate.bat C:\Users\medot\Anaconda3
+# change the command and copy it to the .bashrc file for gitbash
+code ~/.bashrc
+# put the following line (without the # symbol)
+# alias condaprompt="/c/windows/System32/cmd.exe ""/K"" /c/Users/medot/Anaconda3/Scripts/activate.bat /c/Users/medot/Anaconda3"
+
+
+# only for windows this will start the condaprompt in gitbash
+condaprompt
+
+
+# Files 
+# > pet_pals - your project folder
+# > .gitignore - allows you to remove large files or cache files like the .ipynb_checkpoints or db.sqlite - this will prevent commit crashes
+# and also keep your repo free of personal data or data that should be shared via other methods
+# > initdb.py - a file that will allow you to both create the schema and seed your database - if you notice that it uses your app.py to get 
+# the database connection value
+# > Procfile - this tells Heroku what type of process it should run
+# > requirements.txt - this gives Heroku all of the packages that is needed for your server - after creating your virtual environment, 
+# use "pip freeze > requirements.txt" to recreate this file correctly... your APP MUST run in the virtual environment
+# > run_win.bat - the windows executable for you guys running windows (not used by Heroku) - you can use this to TEST your flask server
+# > run.sh - the linux/mac executable and this is also used by Heroku - you can use this to TEST your flask server
+# > runtime.txt - this gives the type of python process that you are about to run
+
+# WANT TO CHANGE THIS FOR ANOTHER PROJECT???
+# - change run.sh and run_win.bat to the correct folders before doing so, use visual studio and take a look at the referenced folder
+# - all files listed above MUST be at root
+# - initdb.py should be used to both create the schema and to seed the database as necessary
+# - update .gitignore to include any cache or large db files to ignore
+
+# all operating systems use the following commands
+conda create -n pet_pals_env python=3.7
+
+# activate your selected environment
+activate pet_pals_env
+
+# install all your packages (for some mac users use "pip3 install ...")
+pip install flask
+pip install flask_sqlalchemy
+pip install gunicorn
+pip install psycopg2
+pip install pandas
+# add any other packages that you will need to run your app
+
+# this command should be run after any change
+pip freeze > requirements.txt
+
+# initializes an empty git repository
+git init
+git remote add origin https://github.com/amaddatu/py-h-test.git
+git add .
+git status
+git commit -m "Initial commit"
+git push
+git push --set-upstream origin master
+
+heroku create
+
+# log into heroku and add the database postgres at this point
+# this will fill in the database environment variable 
+
+git remote -v
+git push heroku master
+
+# commit additional changes via the following
+
+git add .
+git status
+git commit -m "Insert... useful commit message here"
+git push
+git push heroku master
+
+# initialize the database / you can also add seed data into this init file
+heroku run python initdb.py
+
+# will need to add a custom configuration here
